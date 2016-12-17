@@ -1,0 +1,33 @@
+cd Desktop
+ls
+pip install virtualenv
+sudo su
+[sudo] pip install https://github.com/pypa/virtualenv/tarball/develop
+sudo pip install https://github.com/pypa/virtualenv/tarball/develop
+pip install https://github.com/pypa/virtualenv/tarball/develop
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+sudo python get-pip.py
+sudo pip install -U virtualenv
+pip install virtualenv
+pip install virtualenv --upgrade
+mkdir trydjango19
+cd trydjango19
+virtualenv .
+source bin/activate
+.\Scripts\activate
+.\Scripts\activate
+pip freeze
+.\Scripts\activate
+pip freeze
+virtualenv .
+source bin/activate
+.\Scripts\activate
+pip freeze
+pip install django==1.9
+pip uninstall django
+pip install django==1.9
+django-admin.py startproject trydjango19
+ls
+cd trydjango19
+ls
+python manage.py runserver
