@@ -33,14 +33,12 @@ class UserProfile(models.Model):
         return '%s %s %s %s %s %s %s' % (self.user,self.gender,self.height,self.weight,self.user_notes,self.secure_quest,self.secure_answer)
 
 class UserConsumption(models.Model):
-    user = models.OneToOneField(User,
-                                on_delete=models.CASCADE, primary_key=True)
+    user_cons_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=1)
     date_created = models.DateTimeField(auto_now_add=True)
     nbdno = models.CharField(max_length=200)
     food_name = models.CharField(max_length=200)
     food_calories = models.FloatField(default=90)
-
-
 
 
 

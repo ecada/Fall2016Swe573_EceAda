@@ -112,41 +112,6 @@ class ActivityViewSet(viewsets.ModelViewSet):
         queryset = self.model.objects.all()
         return queryset
 
-class UserActivitesViewSet(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,) # to perform CRUD operations.
-    queryset = UserActivities.objects.all().order_by('-date_created')
-    model = UserActivities
-    serializer_class = UserActivitiesSerializer
-    def get_queryset(self):
-        """
-        returns the PROFILE DETAILS of the current user
-        """
-        queryset = self.model.objects.all().filter(user=self.request.user)
-        return queryset
-
-
-    def perform_create(self, serializer):
-        """
-        Make the current user PROFILE DETAIL owner
-        :param serializer:
-        :return:
-        """
-        return serializer.save(user=self.request.user)
-
-class UserActivitiesListViewSet(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-    queryset = UserActivities.objects.all().order_by('-date_created')
-    model = UserActivities
-    serializer_class = UserActivitiesSerializer
-    def get_queryset(self):
-        """
-        returns the PROFILE DETAILS of the current user
-        """
-        queryset = self.model.objects.all().filter(user=self.request.user).order_by('-date_created')
-        return queryset
-
 #Below function is from Mustafa Atik's course on Django
 @csrf_protect
 def food_search(request):
@@ -199,4 +164,40 @@ class UserConsumptionDetailViewSet(viewsets.ModelViewSet):
         returns the PROFILE DETAILS of the current user
         """
         queryset = self.model.objects.all().filter(user=self.request.user)
+        return queryset
+
+
+class UserActivitesViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,) # to perform CRUD operations.
+    queryset = UserActivities.objects.all().order_by('-date_created')
+    model = UserActivities
+    serializer_class = UserActivitiesSerializer
+    def get_queryset(self):
+        """
+        returns the PROFILE DETAILS of the current user
+        """
+        queryset = self.model.objects.all().filter(user=self.request.user)
+        return queryset
+
+
+    def perform_create(self, serializer):
+        """
+        Make the current user PROFILE DETAIL owner
+        :param serializer:
+        :return:
+        """
+        return serializer.save(user=self.request.user)
+
+class UserActivitiesListViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = UserActivities.objects.all().order_by('-date_created')
+    model = UserActivities
+    serializer_class = UserActivitiesSerializer
+    def get_queryset(self):
+        """
+        returns the PROFILE DETAILS of the current user
+        """
+        queryset = self.model.objects.all().filter(user=self.request.user).order_by('-date_created')
         return queryset
