@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
-from .models import UserProfile,Activity,UserActivities,UserConsumption
+from .models import UserProfile,Activity,UserActivities, ConsumptionHistory, Meals, MealConsumption
 from rest_framework.authtoken import views
 
 
@@ -78,11 +78,32 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields= ('user','date_created','date_of_birth','gender','height','weight','user_notes','secure_quest','secure_answer')
 
-class UserConsumptionSerializer(serializers.ModelSerializer):
+class ConsumptionSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user.username',read_only=True)
     class Meta:
-        model= UserConsumption
-        fields= ('user','date_created','nbdno','food_name','food_calories')
+        model= ConsumptionHistory
+        fields= ('consumption_id','user','date_created','nbdno','food_name','food_calories',
+                 'calories_unit','water','water_unit','protein','protein_unit','fat','fat_unit','carbohydrate','carbohydrate_unit',
+                 'fiber','fiber_unit','sugars','sugars_unit','calcium','calcium_unit','iron','iron_unit','magnesium','magnesium_unit',
+                 'phosphorus','phosphorus_unit','potassium','potassium_unit','sodium','sodium_unit','zinc','zinc_unit','vitaminc',
+                 'vitaminc_unit','thiamin','thiamin_unit','riboflavin','riboflavin_unit','niacin','niacin_unit','vitaminb12','vitaminb12_unit',
+                 'vitamina','vitamina_unit', 'saturated','saturated_unit','monounsaturated','monounsaturated_unit','polyunsaturated', 'polyunsaturated_unit',
+                 'trans','trans_unit','cholesterol','cholesterol_unit')
+
+
+class MealsSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.username', read_only=True)
+    class Meta:
+        model = Meals
+        fields=('meal_id','user','meal_name')
+
+class MealConsumptionSerializer(serializers.ModelSerializer):
+    meal = serializers.IntegerField(source='meals.meal_id', read_only=True)
+    consumptionhistory = serializers.IntegerField(source='consumptionhistory.consumption_id', read_only=True)
+    class Meta:
+        model = MealConsumption
+        fields =('meal','consumptionhistory')
+
 
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:

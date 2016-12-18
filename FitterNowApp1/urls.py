@@ -19,7 +19,7 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 from fitternow.appviews import UserViewSet,RegisterUserViewSet,LoginUserViewSet,ActivityViewSet,food_search, \
     UserProfileUpdateViewSet, UserProfileDetailViewSet, UserConsumptionViewSet, UserConsumptionDetailViewSet, \
-    UserActivitesViewSet, UserActivitiesListViewSet
+    UserActivitesViewSet, UserActivitiesListViewSet,CreateMeals,GetMeals,AddFoodtoMeal,GetMealDetail
 from fitternow.appviews import UserProfileViewSet
 # ,UserProfileDetailViewSet, UserActivitesViewSet,UserActivitiesListViewSet,UserProfileUpdateViewSet,UserConsumptionViewSet,UserConsumptionDetailViewSet
 from fitternow import appviews
@@ -38,6 +38,13 @@ router.register(r'Activity', ActivityViewSet)
 #
 router.register(r'UserActivities', UserActivitesViewSet)
 router.register(r'UserActivitiesList', UserActivitiesListViewSet)
+
+router.register(r'CreateMeals', CreateMeals)
+router.register(r'GetMeals', GetMeals)
+
+router.register(r'AddFoodtoMeal', AddFoodtoMeal)
+router.register(r'GetMealDetail', GetMealDetail)
+
 
 
 #router.register(r'UserActivities/(?P<id>\d+)/?$',UserActivitiesViewSet, base_name="UserActivities")

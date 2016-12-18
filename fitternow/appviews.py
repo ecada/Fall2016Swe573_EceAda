@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated,AllowAny, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from .models import UserProfile,Activity,UserActivities,UserConsumption
+from .models import UserProfile,Activity,UserActivities,ConsumptionHistory, Meals, MealConsumption
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication,TokenAuthentication
 import json
 from django.http import HttpResponse
@@ -12,7 +12,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from rest_framework import generics
 from .apiwrapper import FCD
-from .Serializers import UserSerializer, RegisterUserSerializer, LoginUserSerializer,ActivitySerializer,UserActivitiesSerializer,UserConsumptionSerializer
+from .Serializers import UserSerializer, RegisterUserSerializer, LoginUserSerializer,ActivitySerializer,UserActivitiesSerializer,ConsumptionSerializer, \
+    MealsSerializer, MealConsumptionSerializer
 from .Serializers import UserProfileSerializer
 from rest_framework import filters
 from rest_framework.generics import CreateAPIView
@@ -134,9 +135,9 @@ def get_nutrients(request):
 class UserConsumptionViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,) # to perform CRUD operations.
-    queryset = UserConsumption.objects.all().order_by('-date_created')
-    model = UserConsumption
-    serializer_class = UserConsumptionSerializer
+    queryset = ConsumptionHistory.objects.all().order_by('-date_created')
+    model = ConsumptionHistory
+    serializer_class = ConsumptionSerializer
     def get_queryset(self):
         """
         returns the PROFILE DETAILS of the current user
@@ -156,15 +157,104 @@ class UserConsumptionViewSet(viewsets.ModelViewSet):
 class UserConsumptionDetailViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
-    queryset = UserConsumption.objects.all()
-    model = UserConsumption
-    serializer_class = UserConsumptionSerializer
+    queryset = ConsumptionHistory.objects.all()
+    model = ConsumptionHistory
+    serializer_class = ConsumptionSerializer
     def get_queryset(self):
         """
         returns the PROFILE DETAILS of the current user
         """
         queryset = self.model.objects.all().filter(user=self.request.user)
         return queryset
+
+
+#createMeals
+
+class CreateMeals(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,) # to perform CRUD operations.
+    queryset = Meals.objects.all().order_by('-date_created')
+    model = Meals
+    serializer_class = MealsSerializer
+    def get_queryset(self):
+        """
+        returns the PROFILE DETAILS of the current user
+        """
+        queryset = self.model.objects.all().filter(user=self.request.user)
+        return queryset
+
+
+    def perform_create(self, serializer):
+        """
+        Make the current user PROFILE DETAIL owner
+        :param serializer:
+        :return:
+        """
+        return serializer.save(user=self.request.user)
+
+
+
+#retrieve meals by user
+
+class GetMeals(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Meals.objects.all()
+    model = Meals
+    serializer_class = MealsSerializer
+    def get_queryset(self):
+        """
+        returns the PROFILE DETAILS of the current user
+        """
+        queryset = self.model.objects.all().filter(user=self.request.user)
+        return queryset
+
+#add foods to meal
+class AddFoodtoMeal(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,) # to perform CRUD operations.
+    queryset = MealConsumption.objects.all().order_by('-meal')
+    model = MealConsumption
+    serializer_class = MealConsumptionSerializer
+    def get_queryset(self):
+        """
+        returns the PROFILE DETAILS of the current user
+        """
+        queryset = self.model.objects.all().filter(meal=self.kwargs['meal'])
+        return queryset
+
+
+    def perform_create(self, serializer):
+        """
+        Make the current user PROFILE DETAIL owner
+        :param serializer:
+        :return:
+        """
+        return serializer.save(meal=self.kwargs['meal'],consumptionhistory = self.kwargs['consumptionhistory'])
+
+
+
+
+
+#view food in meal
+
+class GetMealDetail(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = MealConsumption.objects.all()
+    model = MealConsumption
+    serializer_class = MealConsumptionSerializer
+    def get_queryset(self):
+        """
+        returns the PROFILE DETAILS of the current user
+        """
+        queryset = self.model.objects.all().filter(meal=self.kwargs['meal'])
+        return queryset
+
+
+
+
+
 
 
 class UserActivitesViewSet(viewsets.ModelViewSet):
