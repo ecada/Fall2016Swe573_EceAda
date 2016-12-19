@@ -99,10 +99,15 @@ class MealsSerializer(serializers.ModelSerializer):
 
 class MealConsumptionSerializer(serializers.ModelSerializer):
     meal = serializers.IntegerField(source='meals.meal_id', read_only=True)
-    consumptionhistory = serializers.IntegerField(source='consumptionhistory.consumption_id', read_only=True)
+    consumptionhistory = serializers.IntegerField(source='ConsumptionHistory.consumption_id', read_only=True)
     class Meta:
         model = MealConsumption
         fields =('meal','consumptionhistory')
+
+class MCSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = MealConsumption
+        fields = ('meal', 'consumptionhistory')
 
 
 class ActivitySerializer(serializers.ModelSerializer):
@@ -115,7 +120,6 @@ class UserActivitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserActivities
         fields = ('user','activity_name','duration','calories_burned')
-
 
 
 

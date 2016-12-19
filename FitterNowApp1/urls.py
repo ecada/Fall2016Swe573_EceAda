@@ -19,7 +19,7 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 from fitternow.appviews import UserViewSet,RegisterUserViewSet,LoginUserViewSet,ActivityViewSet,food_search, \
     UserProfileUpdateViewSet, UserProfileDetailViewSet, UserConsumptionViewSet, UserConsumptionDetailViewSet, \
-    UserActivitesViewSet, UserActivitiesListViewSet,CreateMeals,GetMeals,AddFoodtoMeal,GetMealDetail
+    UserActivitesViewSet, UserActivitiesListViewSet,CreateMeals,GetMeals,MCCreateView,MCListView
 from fitternow.appviews import UserProfileViewSet
 # ,UserProfileDetailViewSet, UserActivitesViewSet,UserActivitiesListViewSet,UserProfileUpdateViewSet,UserConsumptionViewSet,UserConsumptionDetailViewSet
 from fitternow import appviews
@@ -42,8 +42,8 @@ router.register(r'UserActivitiesList', UserActivitiesListViewSet)
 router.register(r'CreateMeals', CreateMeals)
 router.register(r'GetMeals', GetMeals)
 
-router.register(r'AddFoodtoMeal', AddFoodtoMeal)
-router.register(r'GetMealDetail', GetMealDetail)
+#router.register(r'AddFoodtoMeal', AddFoodtoMeal)
+#router.register(r'GetMealDetail', GetMealDetail)
 
 
 
@@ -58,6 +58,9 @@ urlpatterns = [
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'search/$', appviews.food_search),
     url(r'getmeasures/$', appviews.get_measure),
-    url(r'getnutrients/$', appviews.get_nutrients)
+    url(r'getnutrients/$', appviews.get_nutrients),
+    url(r'^create/$', MCCreateView.as_view(), name='create'),
+    url(r'^listmealdetail/$', MCListView.as_view(), name='list')
+
 ]
 

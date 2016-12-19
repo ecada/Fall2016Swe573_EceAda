@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 from rest_framework import generics
 from .apiwrapper import FCD
 from .Serializers import UserSerializer, RegisterUserSerializer, LoginUserSerializer,ActivitySerializer,UserActivitiesSerializer,ConsumptionSerializer, \
-    MealsSerializer, MealConsumptionSerializer
+    MealsSerializer, MealConsumptionSerializer, MCSerialize
 from .Serializers import UserProfileSerializer
 from rest_framework import filters
 from rest_framework.generics import CreateAPIView
@@ -208,29 +208,24 @@ class GetMeals(viewsets.ModelViewSet):
         """
         queryset = self.model.objects.all().filter(user=self.request.user)
         return queryset
-
+""""
 #add foods to meal
 class AddFoodtoMeal(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,) # to perform CRUD operations.
-    queryset = MealConsumption.objects.all().order_by('-meal')
+    queryset = MealConsumption.objects.all()
     model = MealConsumption
     serializer_class = MealConsumptionSerializer
     def get_queryset(self):
-        """
-        returns the PROFILE DETAILS of the current user
-        """
+
         queryset = self.model.objects.all().filter(meal=self.kwargs['meal'])
         return queryset
 
 
-    def perform_create(self, serializer):
-        """
-        Make the current user PROFILE DETAIL owner
-        :param serializer:
-        :return:
-        """
-        return serializer.save(meal=self.kwargs['meal'],consumptionhistory = self.kwargs['consumptionhistory'])
+    def create(self, request, *args, **kwargs):
+
+        #request.data['meal'] =request.Meals.meal_id
+        return super(self.__class__,self).create(request,*args,**kwargs)
 
 
 
@@ -245,17 +240,10 @@ class GetMealDetail(viewsets.ModelViewSet):
     model = MealConsumption
     serializer_class = MealConsumptionSerializer
     def get_queryset(self):
-        """
-        returns the PROFILE DETAILS of the current user
-        """
+
         queryset = self.model.objects.all().filter(meal=self.kwargs['meal'])
         return queryset
-
-
-
-
-
-
+"""
 
 class UserActivitesViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
@@ -291,3 +279,14 @@ class UserActivitiesListViewSet(viewsets.ModelViewSet):
         """
         queryset = self.model.objects.all().filter(user=self.request.user).order_by('-date_created')
         return queryset
+class MCCreateView(CreateAPIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = MealConsumption.objects.all()
+    serializer_class = MCSerialize
+
+class MCListView(ListAPIView):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = MealConsumption.objects.all()
+    serializer_class = MCSerialize
