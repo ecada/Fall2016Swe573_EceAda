@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb4654a4-ef88-409a-8b9c-c38a1125bf6d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fitternow/something/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fitternow/something/test_token" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FitterNowApp1/settings.py" afterPath="$PROJECT_DIR$/FitterNowApp1/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fitternow/tests.py" afterPath="$PROJECT_DIR$/fitternow/tests.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FitterNowApp1/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../FitterNowApp1/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="FitterNowApp1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,8 +71,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/FitterNowApp1/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state relative-caret-position="195">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -192,8 +188,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="66" />
-    <option name="y" value="306" />
+    <option name="x" value="37" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="712" />
   </component>
@@ -630,10 +626,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="66" y="306" width="1280" height="712" extended-state="0" />
-    <editor active="false" />
+    <frame x="37" y="23" width="1280" height="712" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27705976" sideWeight="0.7606635" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27705976" sideWeight="0.7606635" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26377296" sideWeight="0.48083332" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3245033" sideWeight="0.50666666" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18093699" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1062,8 +1058,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/FitterNowApp1/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+        <state relative-caret-position="195">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
