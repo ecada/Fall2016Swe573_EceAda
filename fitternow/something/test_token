@@ -1,0 +1,30 @@
+from django.contrib.auth.models import User
+from django.test import Client
+from django.test import TestCase
+from django.utils import timezone
+import json
+from fitternow import appviews
+from fitternow.models import UserProfile,Activity,UserActivities,ConsumptionHistory, Meals, MealConsumption
+from rest_framework.authtoken.models import Token
+from rest_framework.test import APIRequestFactory
+from rest_framework.test import APITestCase
+from rest_framework.test import force_authenticate
+import unittest
+
+class SimpleTest(APITestCase):
+    def setUp(self):
+        self.factory = APIRequestFactory()
+        self.user = User.objects.create_user(
+            username='user20', first_name='joe', last_name='doe', email='user@fitternow.com', password='pass123')
+        self.token = Token.objects.create(user=self.user)
+        self.token.save()
+
+    def test_token_auth(self):
+        request = self.factory.get('/register', HTTP_AUTHORIZATION='Token {}'.format(self.token))
+        force_authenticate(request, user=self.user)
+        view = appviews.RegisterUserViewSet.as_view({'get': 'list'})
+        response = view(request)
+        self.assertEqual(response.status_code, 200)
+        json_response = json.loads(response.render().content)['results']
+
+
