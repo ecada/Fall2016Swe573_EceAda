@@ -1,0 +1,11 @@
+""""
+class UserActivitiesTestCase(TestCase):
+    user = User.objects.get(username='u6')
+    def setUp(self):
+        UserActivities.objects.create(user=self.user, activity_name='Archery',
+                                                                   duration='2',
+                                                                   calories_burned='300')
+    def test_useractivity_created(self):
+        obj = UserActivities.objects.get(user=self.user)
+        self.assertEqual(obj.user,self.user)
+""""
