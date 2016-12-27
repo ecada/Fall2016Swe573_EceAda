@@ -48,3 +48,14 @@ class ActivityTestCase(TestCase):
 
 
 
+class UserActivitiesTestCase(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='milkshake', first_name='joe', last_name='doe',
+                                             email='user@fitternow.com', password='pass123')
+        UserActivities.objects.create(user=self.user, activity_name='Archery',
+                                                                   duration='2',
+                                                                   calories_burned='300')
+    def test_useractivity_created(self):
+        obj = UserActivities.objects.get(user=self.user)
+        self.assertEqual(obj.user,self.user)
